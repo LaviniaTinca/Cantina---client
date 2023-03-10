@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import { Box, Typography } from "@mui/material";
-import { shades } from "../../theme";
+import { shades } from "../theme";
 import styled from 'styled-components'
 import FacebookIcon from '@mui/icons-material/Facebook';
   import InstagramIcon from '@mui/icons-material/Instagram';

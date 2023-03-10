@@ -6,14 +6,18 @@ const Subscribe = () => {
   const [email, setEmail] = useState("");
 
   return (
-    <Box width="80%" margin="80px auto" textAlign="center">
-      <IconButton>
-        <MarkEmailReadOutlinedIcon fontSize="large" />
-      </IconButton>
-      <Typography variant="h3">Abonează-te la newsletter</Typography>
-      <Typography>
-        pentru meniul zilnic
-      </Typography>
+    <Box width="80%" margin="110px auto" textAlign="center">
+      <Box>
+        <Typography variant="h3">
+          <IconButton>
+            <MarkEmailReadOutlinedIcon fontSize="large" />
+          </IconButton>
+          Abonează-te la newsletter
+        </Typography>
+      </Box>
+        <Typography>
+          pentru meniul zilnic
+        </Typography>
       <Box
         p="2px 4px"
         m="15px auto"
