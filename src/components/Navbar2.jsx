@@ -74,10 +74,9 @@ function Navbar() {
         {/* <Tooltip color= "shades.secondary[500]" size="sm" variant = "outlined">Pachet */}
         <Badge
             //badgeContent={7}
-            //badgeContent={cart.length}
-            badgeContent={8}
+            badgeContent={cart.length}
             color="secondary"
-            //invisible={cart.length === 0}
+            invisible={cart.length === 0}
             sx={{
               "& .MuiBadge-badge": {
                 right: 5,
