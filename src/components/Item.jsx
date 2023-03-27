@@ -15,17 +15,17 @@ const Item = ({ item, width }) => {
   const {
     palette: { neutral },
   } = useTheme();
-
-  const { category, price, name, image } = item.attributes;
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
+  // const name = item.name
+  // const { category, price, name, image } = item.attributes;
+  // const {
+  //   data: {
+  //     attributes: {
+  //       formats: {
+  //         medium: { url },
+  //       },
+  //     },
+  //   },
+  // } = image;
 
   return (
     <Box width={width}>
@@ -36,9 +36,9 @@ const Item = ({ item, width }) => {
       >
         <img
           alt={item.name}
-          width="300px"
-          height="400px"
-          src={`http://localhost:2000${url}`}
+          width="250px"
+          height="250px"
+          src={`http://localhost:3001/assets/${item.picturePath}`}
           onClick={() => navigate(`/item/${item.id}`)}
           style={{ cursor: "pointer" }}
         />
@@ -79,13 +79,13 @@ const Item = ({ item, width }) => {
       </Box>
 
       <Box mt="3px">
-        <Typography variant="subtitle2" color={neutral.dark}>
-          {category
+        {/* <Typography variant="subtitle2" color={neutral.dark}>
+          {item.categories
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())}
-        </Typography>
-        <Typography>{name}</Typography>
-        <Typography fontWeight="bold">${price}</Typography>
+        </Typography> */}
+        <Typography>{item.name}</Typography>
+        <Typography fontWeight="bold">{item.price} lei</Typography>
       </Box>
     </Box>
   );

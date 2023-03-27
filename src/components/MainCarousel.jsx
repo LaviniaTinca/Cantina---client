@@ -20,10 +20,12 @@ const MainCarousel = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
     <Carousel autoPlay
+    //axis = {'vertical'}
       infiniteLoop={true}
       showThumbs={false}
       showIndicators={false}
       showStatus={true}
+      transitionTime = {3}
       renderArrowPrev={(onClickHandler, hasPrev, label) => (
         <IconButton
           onClick={onClickHandler}

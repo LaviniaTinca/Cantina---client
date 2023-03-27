@@ -22,7 +22,6 @@ const ProductList = () => {
 
   async function getItems() {
     const items = await fetch(
-      //"http://localhost:3001/api/items?populate=image",
       "http://localhost:3001/products/",
       { method: "GET" }
     );
@@ -43,9 +42,10 @@ const ProductList = () => {
 //   const garnituri = items.filter(
 //     (item) => item.attributes.categories === "['garnituri']"
 //   );
-//   const bestSellersItems = items.filter(
+//   const desert = items.filter(
 //     (item) => item.attributes.categories === "['desert']"
 //   );
+console.log("soupItems", soupItems)
 
   return (
     <Box width="80%" margin="80px auto">
@@ -79,22 +79,15 @@ const ProductList = () => {
         rowGap="20px"
         columnGap="1.33%"
       >
-        {/* {value === "all" &&
+        {value === "all" &&
           items.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
         {value === "soup" &&
           soupItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
-          ))} */}
-        {/* {value === "bestSellers" &&
-          bestSellersItems.map((item) => (
-            <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-        {value === "topRated" &&
-          garnituri.map((item) => (
-            <Item item={item} key={`${item.name}-${item.id}`} />
-          ))} */}
+        
       </Box>
     </Box>
   );
