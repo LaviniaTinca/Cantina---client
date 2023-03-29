@@ -13,6 +13,7 @@ import {
 } from "../state/authRedux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -31,12 +32,15 @@ const CartMenu = () => {
     return total + item.count * item.price;
   }, 0);
 
+const Img = styled.img`
+border-radius: 10px
+`
   return (
     <Box
       display={isCartOpen ? "block" : "none"}
-      backgroundColor="rgba(0, 0, 0, 0.4)"
+      backgroundColor="rgba(0, 0, 0, 0.3)"
       position="fixed"
-      zIndex={10}
+      zIndex={5}
       width="100%"
       height="100%"
       left="0"
@@ -47,8 +51,8 @@ const CartMenu = () => {
         position="fixed"
         right="0"
         bottom="auto"
-        width="max(200px, 20%)"
-        height="30%"
+        width="max(400px, 20%)"
+        height="80%"
         backgroundColor="white"
         borderRadius={2}
         sx={{top: "60px", right: "130px"}}
@@ -65,13 +69,13 @@ const CartMenu = () => {
           {/* CART LIST */}
           <Box>
             {cart.map((item) => (
-              <Box key={`${item.name}-${item.id}`}>
-                <FlexBox p="15px 0">
-                  <Box flex="1 1 40%">
-                    <img
+              <Box key={`${item.name}-${item._id}`}>
+                <FlexBox p="15px 0" borderRadius="50%">
+                  <Box flex="1 1 40%" borderRadius="50%">
+                    <Img
                       alt={item?.name}
-                      width="123px"
-                      height="164px"
+                      width="70px"
+                      height="80px"
                       src={`http://localhost:3001/assets/${item.picturePath}`}
                     />
                   </Box>
@@ -80,12 +84,12 @@ const CartMenu = () => {
                       <Typography fontWeight="bold">
                         {item.name}
                       </Typography>
-                      <IconButton
+                      <IconButton sx={{color:"red"}} title="Sterge"
                         onClick={() =>
-                          dispatch(removeFromCart({ id: item.id }))
+                          dispatch(removeFromCart({ id: item._id }))
                         }
                       >
-                        <CloseIcon />
+                        <DeleteOutlinedIcon />
                       </IconButton>
                     </FlexBox>
                     {/* <Typography>{item.desc}</Typography> */}
@@ -95,17 +99,17 @@ const CartMenu = () => {
                         alignItems="center"
                         border={`1.5px solid ${shades.neutral[500]}`}
                       >
-                        <IconButton
+                        <IconButton title="Scade"
                           onClick={() =>
-                            dispatch(decreaseCount({ id: item.id }))
+                            dispatch(decreaseCount({ id: item._id }))
                           }
                         >
                           <RemoveIcon />
                         </IconButton>
                         <Typography>{item.count}</Typography>
-                        <IconButton
+                        <IconButton title="Adauga"
                           onClick={() =>
-                            dispatch(increaseCount({ id: item.id }))
+                            dispatch(increaseCount({ id: item._id }))
                           }
                         >
                           <AddIcon />

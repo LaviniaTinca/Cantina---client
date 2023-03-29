@@ -37,14 +37,20 @@ const ProductList = () => {
    console.log("items", useSelector((state) => state.auth.items))
 
   const soupItems = items.filter(
-    (item) => item.categories === "['ciorba', 'post']"
+    (item) => item.categories === "ciorba"
   );
-//   const garnituri = items.filter(
-//     (item) => item.attributes.categories === "['garnituri']"
-//   );
-//   const desert = items.filter(
-//     (item) => item.attributes.categories === "['desert']"
-//   );
+  const garnituraItems = items.filter(
+    (item) => item.categories === "garnitura"
+  );
+  const principalItems = items.filter(
+    (item) =>item.categories === "principal"
+  )
+  const desertItems = items.filter(
+    (item) => item.categories === "desert"
+  );
+  const diverseItems = items.filter(
+    (item) => item.categories === "diverse"
+  )
 console.log("soupItems", soupItems)
 
   return (
@@ -68,13 +74,15 @@ console.log("soupItems", soupItems)
       >
         <Tab label="Meniul complet" value="all" />
         <Tab label="SUPE/Ciorbe" value="soup" />
-        <Tab label="Garnituri" value="bestSellers" />
-        <Tab label="diverse" value="topRated" />
+        <Tab label="Garnituri" value="garnitura" />
+        <Tab label="Principal" value="principal" />
+        <Tab label="Desert" value="desert" />
+        <Tab label="Diverse" value="diverse" />
       </Tabs>
       <Box
         margin="0 auto"
         display="grid"
-        gridTemplateColumns="repeat(auto-fill, 300px)"
+        gridTemplateColumns="repeat(auto-fill, 250px)"
         justifyContent="space-around"
         rowGap="20px"
         columnGap="1.33%"
@@ -85,6 +93,22 @@ console.log("soupItems", soupItems)
           ))}
         {value === "soup" &&
           soupItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+          {value === "garnitura" &&
+          garnituraItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+          {value === "principal" &&
+          principalItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+          {value === "desert" &&
+          desertItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+          {value === "diverse" &&
+          diverseItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
         
