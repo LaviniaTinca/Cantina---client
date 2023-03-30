@@ -1,16 +1,22 @@
-// import ShoppingList from "./ShoppingList";
-// import Subscribe from "./Subscribe";
-import MainCarousel from "./MainCarousel";
-import {Carousel} from 'react-responsive-carousel'
-import Newsletter from '../components/Newsletter'
+import React from 'react'
+import MainCarousel from "../components/MainCarousel";
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar2'
+import CartMenu from '../components/CartMenu'
+import DailyMenu from '../components/DailyMenu';
+import ProductList from '../components/ProductList';
 
-function Home() {
+const Home = () => {
   return (
-    <div className="home">Home
-      <MainCarousel />
-      <Newsletter/>
+    <div>
+        <Navbar/>
+        <CartMenu/>
+        <MainCarousel />
+        <DailyMenu/>
+        <ProductList/>
+        <Footer/>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

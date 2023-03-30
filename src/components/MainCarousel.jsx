@@ -19,11 +19,13 @@ export const heroTextureImports = importAll(
 const MainCarousel = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
-    <Carousel
+    <Carousel autoPlay
+    //axis = {'vertical'}
       infiniteLoop={true}
       showThumbs={false}
-      showIndicators={true}
-      showStatus={false}
+      showIndicators={false}
+      showStatus={true}
+      transitionTime = {3}
       renderArrowPrev={(onClickHandler, hasPrev, label) => (
         <IconButton
           onClick={onClickHandler}

@@ -1,17 +1,19 @@
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-// import AddIcon from "@mui/icons-material/Add";
-// import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import styled from "@emotion/styled";
-import { shades } from "../../theme";
+import { shades } from "../theme";
 import {
   decreaseCount,
   increaseCount,
   removeFromCart,
   setIsCartOpen,
-} from "../../state";
+} from "../state/authRedux";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -22,19 +24,23 @@ const FlexBox = styled(Box)`
 const CartMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
-  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  const cart = useSelector((state) => state.auth.cart);
+  const isCartOpen = useSelector((state) => state.auth.isCartOpen);
+ // const [isCartOpen, seIsCartOpen] = useState(false)
 
   const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price;
+    return total + item.count * item.price;
   }, 0);
 
+const Img = styled.img`
+border-radius: 10px
+`
   return (
     <Box
       display={isCartOpen ? "block" : "none"}
-      backgroundColor="rgba(0, 0, 0, 0.4)"
+      backgroundColor="rgba(0, 0, 0, 0.3)"
       position="fixed"
-      zIndex={10}
+      zIndex={5}
       width="100%"
       height="100%"
       left="0"
@@ -44,71 +50,73 @@ const CartMenu = () => {
       <Box
         position="fixed"
         right="0"
-        bottom="0"
-        width="max(400px, 30%)"
-        height="100%"
+        bottom="auto"
+        width="max(400px, 20%)"
+        height="80%"
         backgroundColor="white"
+        borderRadius={2}
+        sx={{top: "60px", right: "130px"}}
       >
-        <Box padding="30px" overflow="auto" height="100%">
+        <Box padding="10px" overflow="auto" height="100%">
           {/* HEADER */}
-          <FlexBox mb="15px">
-            <Typography variant="h3">SHOPPING BAG ({cart.length})</Typography>
+          <FlexBox mb="5px">
+            <Typography variant="h4"><span>Pachet</span> ({cart.length})</Typography>
             <IconButton onClick={() => dispatch(setIsCartOpen({}))}>
               <CloseIcon />
             </IconButton>
           </FlexBox>
 
           {/* CART LIST */}
-          {/* <Box>
+          <Box>
             {cart.map((item) => (
-              <Box key={`${item.attributes.name}-${item.id}`}>
-                <FlexBox p="15px 0">
-                  <Box flex="1 1 40%">
-                    <img
+              <Box key={`${item.name}-${item._id}`}>
+                <FlexBox p="15px 0" borderRadius="50%">
+                  <Box flex="1 1 40%" borderRadius="50%">
+                    <Img
                       alt={item?.name}
-                      width="123px"
-                      height="164px"
-                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      width="70px"
+                      height="80px"
+                      src={`http://localhost:3001/assets/${item.picturePath}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">
                       <Typography fontWeight="bold">
-                        {item.attributes.name}
+                        {item.name}
                       </Typography>
-                      <IconButton
+                      <IconButton sx={{color:"red"}} title="Sterge"
                         onClick={() =>
-                          dispatch(removeFromCart({ id: item.id }))
+                          dispatch(removeFromCart({ id: item._id }))
                         }
                       >
-                        <CloseIcon />
+                        <DeleteOutlinedIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography>{item.attributes.shortDescription}</Typography>
+                    {/* <Typography>{item.desc}</Typography> */}
                     <FlexBox m="15px 0">
                       <Box
                         display="flex"
                         alignItems="center"
                         border={`1.5px solid ${shades.neutral[500]}`}
                       >
-                        <IconButton
+                        <IconButton title="Scade"
                           onClick={() =>
-                            dispatch(decreaseCount({ id: item.id }))
+                            dispatch(decreaseCount({ id: item._id }))
                           }
                         >
                           <RemoveIcon />
                         </IconButton>
                         <Typography>{item.count}</Typography>
-                        <IconButton
+                        <IconButton title="Adauga"
                           onClick={() =>
-                            dispatch(increaseCount({ id: item.id }))
+                            dispatch(increaseCount({ id: item._id }))
                           }
                         >
                           <AddIcon />
                         </IconButton>
                       </Box>
                       <Typography fontWeight="bold">
-                        ${item.attributes.price}
+                        {item.price} lei
                       </Typography>
                     </FlexBox>
                   </Box>
@@ -116,29 +124,34 @@ const CartMenu = () => {
                 <Divider />
               </Box>
             ))}
-          </Box> */}
+          </Box>
 
           {/* ACTIONS */}
-          <Box m="20px 0">
-            <FlexBox m="20px 0">
+          <Box m="10px 0">
+            <FlexBox m="10px 0">
               <Typography fontWeight="bold">SUBTOTAL</Typography>
-              <Typography fontWeight="bold">${totalPrice}</Typography>
+              <Typography fontWeight="bold">{totalPrice} Lei</Typography>
             </FlexBox>
             <Button
               sx={{
-                backgroundColor: shades.primary[400],
-                color: "white",
-                borderRadius: 0,
+                backgroundColor: shades.neutral[200],
+                border: "black",
+                color: "black",
+                borderRadius: 2,
                 minWidth: "100%",
+                height: "20px",
                 padding: "20px 40px",
                 m: "20px 0",
+                "&:hover": { 
+                  backgroundColor: shades.secondary[800],
+                  color: "white" },
               }}
               onClick={() => {
                 navigate("/checkout");
                 dispatch(setIsCartOpen({}));
               }}
             >
-              CHECKOUT
+              FINALIZARE
             </Button>
           </Box>
         </Box>

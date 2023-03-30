@@ -7,15 +7,15 @@ import {
   SearchOutlined,
 } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
-import { shades } from "../../theme";
-import { setIsCartOpen } from "../../state";
+import { shades } from "../theme";
+//import { setIsCartOpen } from "../state";
 import styled from 'styled-components'
-import { mobile } from "../../responsive";
+import { mobile } from "../responsive";
 
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+  //const cart = useSelector((state) => state.cart.cart);
 
   return (
     <Box
@@ -50,7 +50,7 @@ function Navbar() {
           columnGap="20px"
           zIndex="2"
         >
-          <IconButton sx={{ color: "black" }}>
+          {/* <IconButton sx={{ color: "black" }}>
             <SearchOutlined />
           </IconButton>
           <IconButton sx={{ color: "black" }}>
@@ -76,13 +76,10 @@ function Navbar() {
             >
               <ShoppingBagOutlined />
             </IconButton>
-          </Badge>
+          </Badge> */}
           {/* <IconButton sx={{ color: "black" }}>
             <MenuOutlined />
           </IconButton> */}
-          <Link to="/register" style={{ textDecoration: "none" }}>
-            <MenuItem>REGISTER</MenuItem>
-          </Link>
           <Link to="/login" style={{ textDecoration: "none" }}>
             <MenuItem>SIGN IN</MenuItem>
           </Link>
