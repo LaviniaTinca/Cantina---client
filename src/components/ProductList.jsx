@@ -13,7 +13,7 @@ const ProductList = () => {
   const [value, setValue] = useState("all"); //value for our filter option
   const items = useSelector((state) => state.auth.items);
   //const  items = []
-  console.log("items", items)
+  //console.log("items", items)
   const breakPoint = useMediaQuery("(min-width:600px)");
 
   const handleChange = (event, newValue) => {
@@ -34,7 +34,7 @@ const ProductList = () => {
     getItems();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-   console.log("items", useSelector((state) => state.auth.items))
+  //  console.log("items", useSelector((state) => state.auth.items))
 
   const soupItems = items.filter(
     (item) => item.categories === "ciorba"
@@ -51,7 +51,7 @@ const ProductList = () => {
   const diverseItems = items.filter(
     (item) => item.categories === "diverse"
   )
-console.log("soupItems", soupItems)
+// console.log("soupItems", soupItems)
 
   return (
     <Box width="80%" margin="80px auto">
@@ -82,7 +82,7 @@ console.log("soupItems", soupItems)
       <Box
         margin="0 auto"
         display="grid"
-        gridTemplateColumns="repeat(auto-fill, 250px)"
+        gridTemplateColumns="repeat(auto-fill, 200px)"
         justifyContent="space-around"
         rowGap="20px"
         columnGap="1.33%"

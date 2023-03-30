@@ -51,7 +51,7 @@ function Navbar() {
         alignItems="center"
       >
         <Box
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
           sx={{ "&:hover": { cursor: "pointer" } }}
           color={shades.secondary[500]}
         >

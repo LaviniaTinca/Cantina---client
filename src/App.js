@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Navigate, useLocation } from "react-router-dom";
 import Home from "./scenes/Home";
 import Landing from "./scenes/Landing";
 // import Navbar from "./scenes/global/Navbar";
@@ -15,6 +15,7 @@ import LoginPage from "./scenes/loginPage/Login";
 // import Login3 from './scenes/Login3';
 // import Success from './scenes/Success';
 import { useSelector } from "react-redux";
+import ItemDetails from "./scenes/ItemDetails";
 //import New from "./scenes/New";
 
 const ScrollToTop = () => {
@@ -45,6 +46,8 @@ function App() {
               path="/home"
               element={isAuth ? <Home /> : <Navigate to="/" />}
             />
+          <Route path="item/:itemId" element={isAuth ? <ItemDetails /> : <Navigate to="/" />} />
+
         </Routes>
         {/* <CartMenu /> */}
 

@@ -36,10 +36,10 @@ const Item = ({ item, width }) => {
       >
         <img
           alt={item.name}
-          width="250px"
-          height="250px"
+          width="200px"
+          height="200px"
           src={`http://localhost:3001/assets/${item.picturePath}`}
-          onClick={() => navigate(`/item/${item.id}`)}
+          onClick={() => navigate(`/item/${item._id}`)}
           style={{ cursor: "pointer" }}
         />
         <Box
