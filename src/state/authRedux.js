@@ -4,7 +4,6 @@ const initialState = {
   mode: "light",
   user: null,
   token: null,
-  // posts: [],
   isCartOpen: false,
   cart: [],
   items: [],
@@ -77,7 +76,17 @@ export const authSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-      state.cart = [...state.cart.action.payload.item];
+      const ProductExist = state.cart.find(item => item._id === action.payload.item._id)
+
+      if (ProductExist) {
+        state.cart = state.cart.map(item => item._id === action.payload.item._id 
+           ? {...ProductExist, count: ProductExist.count+action.payload.item.count}
+           : item   
+        )
+      }
+      else{
+        state.cart = [...state.cart, action.payload.item];
+      }
     },
 
     removeFromCart: (state, action) => {

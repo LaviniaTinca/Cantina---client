@@ -35,6 +35,7 @@ const ProductList = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   //  console.log("items", useSelector((state) => state.auth.items))
+   console.log("items", useSelector((state) => state.auth.items))
 
   const soupItems = items.filter(
     (item) => item.categories === "ciorba"
@@ -52,6 +53,7 @@ const ProductList = () => {
     (item) => item.categories === "diverse"
   )
 // console.log("soupItems", soupItems)
+console.log("soupItems", soupItems)
 
   return (
     <Box width="80%" margin="80px auto">
