@@ -1,43 +1,47 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { shades } from "../theme";
-import { addToCart } from "../state/authRedux";
-import { useDispatch, useSelector } from "react-redux";
-import Item from "../components/Item";
-import { setItems } from "../state/authRedux";
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar2'
-import CartMenu from '../components/CartMenu'
+import { Box, Button, IconButton, Typography } from "@mui/material"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import { useParams, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+// import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { 
+  Add as AddIcon,
+  Remove as RemoveIcon,
+  RestaurantMenu as RestaurantMenuIcon
+  }from "@mui/icons-material"
+import { useDispatch } from "react-redux"
+import { shades } from "../theme"
+import { addToCart } from "../state/authRedux"
+import Item from "../components/Item"
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar2"
+import CartMenu from "../components/CartMenu"
 
 
 const ItemDetails = () => {
-  const dispatch = useDispatch();
-  const { itemId } = useParams();
-  const [value, setValue] = useState("description");
-  const [count, setCount] = useState(1);
-  const [item1, setItem] = useState(null);
- // const [items, setItems] = useState([]); //for related products
-  const items = useSelector((state) => state.auth.items);
-  //const item = useSelector((state) => state.auth.item)
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const { itemId } = useParams()
+  const [value, setValue] = useState("description")
+  const [count, setCount] = useState(1)
+  const [item, setItem] = useState(null)
+  const [items, setItems] = useState([]); //for related products
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
+
+  console.log('itemID', itemId)
 
   async function getItem() {
-    const item1 = await fetch(
+    const item = await fetch(
       `http://localhost:3001/products/find/:${itemId}`,
       {
         method: "GET",
       }
-    );
-    const itemJson = await item.json();
-    setItem(itemJson);
+    )
+    const itemJson = await item.json()
+    console.log("itemJson in ItemDetails", itemJson)
+    setItem(itemJson)
   }
 
   async function getItems() {
@@ -46,31 +50,22 @@ const ItemDetails = () => {
         {
         method: "GET",
       }
-    );
+    )
     const itemsJson = await items.json();
-    dispatch(setItems(itemsJson));
+    console.log('itemsJson', itemsJson)
+    setItems(itemsJson)
   }
 
   useEffect(() => {
-    getItem();
-    getItems();
-  }, [itemId]); // eslint-disable-line react-hooks/exhaustive-deps
+    getItem()
+    getItems()
+  }, [itemId])
 
-    console.log("items", items)
-
-
-  console.log('item1', item1, items)
-  const item = items.filter(
-    (product) => product._id === itemId
-  )[0]
-
-
-  console.log('item', item)
   return (
     <>
     <Navbar/>
     <CartMenu/>
-    <Box width="80%" m="80px auto">
+   {item && <Box width="80%" m="80px auto">
       <Box display="flex" flexWrap="wrap" columnGap="40px">
         {/* IMAGES */}
         <Box flex="1 1 20%" mt ="20px" mb="40px">
@@ -85,17 +80,22 @@ const ItemDetails = () => {
 
         {/* ACTIONS */}
         <Box flex="1 1 50%" mb="40px">
-          {/* <Box display="flex" justifyContent="space-between">
-            <Box>Home/Item</Box>
-            <Box>Prev Next</Box>
-          </Box> */}
+        <Box
+          onClick={() => navigate("/home")}
+          sx={{ "&:hover": { cursor: "pointer" } }}
+          color={shades.secondary[500]}
+        >
+        < RestaurantMenuIcon/> MENIUL ZILEI
+        </Box>
 
           <Box m="65px 0 25px 0">
             <Typography variant="h3">{item?.name}</Typography>
             <Typography sx={{ mt: "20px" }}>
               {item?.desc}
             </Typography>
-            <Typography marginTop={3} color="crimson"><b>{item?.price} Lei / 100 grame</b></Typography>
+            <Typography marginTop={3} color="crimson">
+              <b>{item?.price} Lei / 100 grame</b>
+            </Typography>
 
           </Box>
 
@@ -172,15 +172,15 @@ const ItemDetails = () => {
           columnGap="1.33%"
           justifyContent="space-between"
           >
-          {items.slice(0, 10).map((item, i) => (
+          {items.slice(0, 4).map((item, i) => (
             <Item key={`${item.name}-${i}`} item={item} />
             ))}
         </Box>
       </Box>
-    </Box>
+    </Box>}
     <Footer/>
  </>
-  );
-};
+  )
+}
 
-export default ItemDetails;
+export default ItemDetails

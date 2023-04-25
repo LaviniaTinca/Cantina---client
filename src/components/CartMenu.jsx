@@ -147,7 +147,7 @@ border-radius: 10px
                   color: "white" },
               }}
               onClick={() => {
-                navigate("/checkout");
+                navigate("/cart");
                 dispatch(setIsCartOpen({}));
               }}
             >

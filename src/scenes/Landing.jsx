@@ -3,7 +3,7 @@
 import Footer from "../components/Footer";
 import MainCarousel from "../components/MainCarousel";
 import Newsletter from '../components/Newsletter'
-import Navbar from '../components/Navbar1'
+import Navbar from '../components/Navbar3'
 
 function Landing() {
   return (

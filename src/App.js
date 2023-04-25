@@ -2,21 +2,14 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./scenes/Home";
 import Landing from "./scenes/Landing";
-// import Navbar from "./scenes/global/Navbar";
-//import ItemDetails from "./scenes/itemDetails/ItemDetails";
-// import CartMenu from "./scenes/global/CartMenu";
 import LoginPage from "./scenes/loginPage/Login";
-// import Checkout from "./scenes/checkout/Checkout";
-// import Confirmation from "./scenes/checkout/Confirmation";
-// import Footer2 from './components/Footer2'
-// import Register from './scenes/Register';
-// import Login from './scenes/Login';
-// import Login2 from './scenes/Login2';
-// import Login3 from './scenes/Login3';
-// import Success from './scenes/Success';
 import { useSelector } from "react-redux";
 import ItemDetails from "./scenes/ItemDetails";
-//import New from "./scenes/New";
+import Cart from "./scenes/Cart";
+import Checkout from "./scenes/checkout/Checkout";
+import Confirmation from "./scenes/checkout/Confirmation";
+import Dashboard from "./scenes/admin/Dashboard";
+import Layout from "./scenes/Layout";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -30,9 +23,11 @@ const ScrollToTop = () => {
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.auth.token));
-  //const isAuth = true;
-  console.log(isAuth)
-  console.log(useSelector((state) => state.auth))
+  const user = useSelector((state) => state.auth.user);
+  const isAdmin = isAuth && user.isAdmin;
+
+   console.log("isAdmin", isAdmin)
+  // console.log(useSelector((state) => state.auth))
 
   return (
     <div className="app">
@@ -47,10 +42,13 @@ function App() {
               element={isAuth ? <Home /> : <Navigate to="/" />}
             />
           <Route path="item/:itemId" element={isAuth ? <ItemDetails /> : <Navigate to="/" />} />
-
+          <Route path="cart" element={isAuth ? <Cart /> : <Navigate to="/" />} />
+          <Route path="checkout" element={isAuth ? <Checkout /> : <Navigate to="/" />} />
+          <Route path="checkout/success" element={isAuth ? <Confirmation /> : <Navigate to="/" />} />
+          <Route path ="/dashboard" element = {isAdmin ? <Layout user = {user}/> : <Navigate to="/" />}>
+            <Route path = "/dashboard" element = {<Dashboard/>}/>
+          </Route>
         </Routes>
-        {/* <CartMenu /> */}
-
       </BrowserRouter>
     </div>
   );

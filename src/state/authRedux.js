@@ -89,6 +89,11 @@ export const authSlice = createSlice({
       }
     },
 
+    clearCart: (state, action) =>{
+      //return {type: "CLEAR_CART"}
+      state.cart = []
+    },
+
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item._id !== action.payload.id);
     },
@@ -116,7 +121,7 @@ export const authSlice = createSlice({
     },
   },
 });
-export const { setMode, setLogin, setLogout, setItems, addToCart,
+export const { setMode, setLogin, setLogout, setItems, addToCart, clearCart,
   removeFromCart,
   increaseCount,
   decreaseCount,
