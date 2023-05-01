@@ -4,6 +4,7 @@ import {Outlet} from "react-router-dom"
 import { useSelector} from "react-redux"
 import Navbar from "../components/NavbarAdmin"
 import Sidebar from "../components/Sidebar"
+import MainDashboard from "./admin/MainDashboard"
 
 const Layout = ({user}) => {
   const isNonMobile = useMediaQuery("(min-width: 600px)")
@@ -26,7 +27,9 @@ const Layout = ({user}) => {
           setIsSidebarOpen={setIsSidebarOpen}
         />
       </Box>
+      <MainDashboard/>
       </Box>
+
     );
   };
   

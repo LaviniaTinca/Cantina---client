@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar3";
 import CartMenu from "../components/CartMenu";
 import DailyMenu from "../components/DailyMenu";
 import ProductList from "../components/ProductList";
+import AboutUs from "../components/AboutUs.jsx";
+import KitchenIcons from "../components/HomeIcons"
 
 const Home = () => {
   return (
@@ -12,7 +14,9 @@ const Home = () => {
       <Navbar />
       <CartMenu />
       <MainCarousel />
-      <DailyMenu />
+      <KitchenIcons/>
+      <AboutUs/>
+      {/* <DailyMenu /> */}
       <ProductList />
       <Footer />
     </div>

@@ -8,7 +8,7 @@ import ItemDetails from "./scenes/ItemDetails";
 import Cart from "./scenes/Cart";
 import Checkout from "./scenes/checkout/Checkout";
 import Confirmation from "./scenes/checkout/Confirmation";
-import Dashboard from "./scenes/admin/Dashboard";
+import MainDashboard from "./scenes/admin/MainDashboard";
 import Layout from "./scenes/Layout";
 
 const ScrollToTop = () => {
@@ -46,7 +46,7 @@ function App() {
           <Route path="checkout" element={isAuth ? <Checkout /> : <Navigate to="/" />} />
           <Route path="checkout/success" element={isAuth ? <Confirmation /> : <Navigate to="/" />} />
           <Route path ="/dashboard" element = {isAdmin ? <Layout user = {user}/> : <Navigate to="/" />}>
-            <Route path = "/dashboard" element = {<Dashboard/>}/>
+            <Route path = "/dashboard" element = {<MainDashboard/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
