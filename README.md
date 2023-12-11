@@ -6,7 +6,7 @@ The project includes implementation of a web application, authentication, form v
 
 Thank you!
 
-###----------------------------------------------------------------------------------------
+### ----------------------------------------------------------------------------------------
 
 # Getting Started with Create React App
 
