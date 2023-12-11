@@ -1,3 +1,13 @@
+# Canteen App
+
+This repository contains my working solution for the web application project related to a student canteen.
+
+The project includes implementation of a web application, authentication, form validation, API integration (MERN project), Stripe payment integrated.
+
+Thank you!
+
+###----------------------------------------------------------------------------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
